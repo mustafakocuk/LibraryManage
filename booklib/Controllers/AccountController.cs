@@ -134,7 +134,7 @@ namespace booklib.Controllers
             entity.User = user;
 
             //List<LibViewModel> libs =
-            //    _databaseContext.Libs.ToList().Select(x => _mapper.Map<LibViewModel>(x)).ToList();
+            //    _databaseContext.Libs.ToList().Select(x => _mapper.Map<LibViewModel>(x)).xToList();
             
             _databaseContext.Add(entity);
             _databaseContext.SaveChanges();
