@@ -1,0 +1,48 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+#box {
+    max-width: 80%;
+    position: relative;
+}
+
+    #box .fa-search {
+        position: absolute;
+        top: 14px;
+        left: 12px;
+        font-size: 20px;
+        color: cornflowerblue;
+    }
+
+#search {
+    width: 30%;
+    box-sizing: border-box;
+    border: 2px solid cornflowerblue;
+    border-radius: 4px;
+    font-size: 18px;
+    padding: 12px 20px 12px 40px;
+    -moz-transition: width 0.4s ease-in-out;
+    -o-transition: width 0.4s ease-in-out;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+    #search:focus {
+        width: 100%;
+    }

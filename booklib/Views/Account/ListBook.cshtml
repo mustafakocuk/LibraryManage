@@ -1,0 +1,47 @@
+﻿@model List<LibViewModel>
+@{
+    ViewData["Title"] = "myBooks";
+}
+
+<div class="row">
+    <div class="col">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    @*<th>UserName</th>
+                    <th>BookName</th>
+                    <th>BookType</th>
+                    <th>BookSubject</th>
+                    <th>Author</th>*@
+                    <th>User ID</th>
+                    <th>Book ID</th>
+                    <th>GivenDate</th>
+                    <th>ReturnDate</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ( LibViewModel lib in Model)
+                {
+                    <tr>
+                        @*<td>@lib.user.UserName</td>
+                        <td>@lib.book.BookName</td>
+                        <td>@lib.book.BookType</td>
+                        <td>@lib.book.BookSubject</td>
+                        <td>@lib.book.Author</td>*@
+                        <td>@lib.UserID</td>
+                        <th>@lib.BookId</th>
+                        <td>@lib.GivenDate</td>
+                        <td>@lib.ReturnDate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

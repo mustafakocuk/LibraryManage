@@ -1,0 +1,98 @@
+﻿@model List<BookModel>
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="row">
+    <div class="col">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <hr />
+    </div>
+</div>
+
+@*<div class="row mb-3">
+    <div class="col">
+        <a asp-action="BookListed" class="btn btn-primary btn-sm"><i class="fa fa-plus me-2"></i>New User</a>
+    </div>
+</div>*@
+
+<div class="row mb-3">
+    <div class="col">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>BookName</th>
+                    <th>Author</th>
+                    <th>BookSubject</th>
+                    <th>BookType</th>
+                    <th>PublishingDate</th>
+                    <th>Stock</th>
+                     @if(User.Identity.IsAuthenticated)
+                     {
+                                if (User.IsInRole("moderator"))
+                                {
+                                 <th>Düzenle</th>
+                                 <th>Sil</th>
+                                }
+                     }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("user"))
+                        {
+                            <th>Ödünç Al</th>
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (BookModel book in Model)
+                {
+                    <tr>
+                        <td>@book.BookName</td>
+                        <td>@book.Author</td>
+                        @* <td>
+                    @if (book.Valid)
+                    {
+                    <i class="fa fa-check text-success"></i>
+                    }
+                    else
+                    {
+                    <i class="fa fa-times text-danger"></i>
+                    }
+                    </td>*@
+                        <td>@book.BookSubject</td>
+                        <td>@book.BookType</td>
+                        <td>@book.PublishingDate</td>
+                        <td>@book.Stock</td>
+                        
+                     @if(User.Identity.IsAuthenticated)
+                     {
+                                if (User.IsInRole("moderator"))
+                                {
+                                 <td><a asp-action="Edit"  class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Edit</a></td>
+                                    <td><a asp-action="Delete" 
+                        onclick="return confirm('Are you sure want to delete this user ')"
+                        class="btn btn-danger btn-sm"><i class="fa fa-trash me-2"></i>Remove</a>
+                                    </td>
+                                }
+                            }
+                     @if (User.Identity.IsAuthenticated)
+                        {
+                                if (User.IsInRole("user"))
+                            {
+
+                                <td>
+                                    
+                                    <a asp-action="BorrowBook" asp-route-id="@book.BookId" 
+                                  
+                                     class="btn btn-danger btn-sm"><i class="fa-solid fa-book"></i> İste</a>
+                                   
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

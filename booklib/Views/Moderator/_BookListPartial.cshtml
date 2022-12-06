@@ -1,0 +1,39 @@
+﻿@model List<BookModel>
+
+<table class="table table-hover table-sm">
+    <thead>
+        <tr>
+            <th>Book Name</th>
+            <th>Book Type</th>
+            <th>Book Subject</th>
+            <th>Author</th>
+            <th>Stock</th>
+            <th>Publishing Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (BookModel book in Model)
+        {
+            <tr>
+                <td>@book.BookName</td>
+                <td>@book.BookType</td>
+                <td>@book.BookSubject</td>
+                <td>@book.Author</td>
+                <td>@book.Stock</td>
+                <td>@book.PublishingDate</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@book.BookId" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Edit</a>
+                </td>
+                <td>
+                    <a asp-action="DeleteBook" asp-route-id="@book.BookId"
+                   data-ajax-confirm="Are you sure want to delete this user : @book.BookName?"
+                   data-ajax="true" data-ajax-method="get" data-ajax-update="#panel"
+                   class="btn btn-danger btn-sm"><i class="fa fa-trash me-2"></i>Remove</a>
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

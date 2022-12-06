@@ -1,0 +1,83 @@
+﻿@model BookModel
+
+<div class="modal-header">
+    <h1 class="modal-title fs-5">Add New Book</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+@*<div class="col-6">
+    <form method="post" asp-action="Index" enctype="multipart/form-data">
+    <div class="text-center mb-3">
+    <img src="~/uploads/@ViewData["BookImage"]" width="128" class="img-thumbnail rounded" />
+    </div>
+    <div class="form-group mb-3">
+    <label class="form-label small">Kitap Kapağı<span class="badge bg-danger ms-2">zorunlu</span></label>
+    <input type="file" name="file" class="form-control" accept=".jpg" />
+    <div class="text-secondary">
+    <span class="small">
+    <i class="fa fa-info-circle me-2"></i>Only jpg files
+    </span>
+    </div>
+    <div class="text-center mt-3">
+    <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Kaydet</button>
+    </div>
+    </div>
+    </form>
+    </div>*@
+
+<div class="modal-body">
+    <form id="frmAddNewBook" asp-action="AddNewBook" method="post"
+          data-ajax="true" data-ajax-method="post" data-ajax-update="#modalAddContent">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+
+        <div class="form-group mb-3">
+            <label asp-for="BookName" class="form-label">Kitap Adı<span class="badge bg-danger ms-2">zorunlu</span></label>
+            <input asp-for="BookName" class="form-control" placeholder="Kitap Adı" />
+            <span asp-validation-for="BookName" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Author" class="form-label">Yazar<span class="badge bg-danger ms-2">zorunlu</span></label>
+            <input asp-for="Author" class="form-control" placeholder="Yazar" />
+            <span asp-validation-for="Author" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="BookType" class="form-label">Kitap Türü<span class="badge bg-danger ms-2">zorunlu</span></label>
+            <input asp-for="BookType" class="form-control" placeholder="Kitap Türü" />
+            <span asp-validation-for="BookType" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="BookSubject" class="form-label">Özet<span class="badge bg-danger ms-2">zorunlu</span></label>
+            <input asp-for="BookSubject" class="form-control" placeholder="Özet" />
+            <span asp-validation-for="BookSubject" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Stock" class="form-label">Stok<span class="badge bg-danger ms-2">zorunlu</span></label>
+            <input asp-for="Stock" type="number" class="form-control" />
+            <span asp-validation-for="Stock" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="PublishingDate" class="form-label small">Yayın Tarihi<span class="badge bg-danger ms-2">zorunlu</span></label>
+            <input asp-for="PublishingDate" name="publishingdate" type="date" class="form-control" />
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary btn-sm" form="frmAddNewBook"><i class="fa fa-save me-2"></i>Save</button>
+</div>
+
+
+@if (string.IsNullOrEmpty(Model.Done) == true)
+{
+    <script>
+        $("#modalAdd").modal("hide");
+        refresh.click();
+    </script>
+}
