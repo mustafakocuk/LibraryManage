@@ -20,27 +20,32 @@
                     <th>BookType</th>
                     <th>BookSubject</th>
                     <th>Author</th>*@
-                    <th>User ID</th>
-                    <th>Book ID</th>
+                    <th>UserName</th>
+                    <th>BookName</th>
                     <th>GivenDate</th>
                     <th>ReturnDate</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ( LibViewModel lib in Model)
-                {
-                    <tr>
-                        @*<td>@lib.user.UserName</td>
-                        <td>@lib.book.BookName</td>
-                        <td>@lib.book.BookType</td>
-                        <td>@lib.book.BookSubject</td>
-                        <td>@lib.book.Author</td>*@
-                        <td>@lib.UserID</td>
-                        <th>@lib.BookId</th>
-                        <td>@lib.GivenDate</td>
-                        <td>@lib.ReturnDate</td>
-                    </tr>
+                
+                    @foreach (LibViewModel lib in Model)
+                    {
+                    if (lib.UserId.ToString() == ViewBag.userid)
+                        {
+                            <tr>
+                                @*<td>@lib.user.UserName</td>
+                            <td>@lib.book.BookName</td>
+                            <td>@lib.book.BookType</td>
+                            <td>@lib.book.BookSubject</td>
+                            <td>@lib.book.Author</td>*@
+                                <td>@lib.UserName</td>
+                                <td>@lib.BookName</td>
+                                <td>@lib.GivenDate</td>
+                                <td>@lib.ReturnDate</td>
+                            </tr>
+                        }
                 }
+                
             </tbody>
         </table>
     </div>

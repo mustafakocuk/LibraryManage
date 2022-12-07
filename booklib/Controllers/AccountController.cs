@@ -129,27 +129,44 @@ namespace booklib.Controllers
             Guid userId = new Guid(principal.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             User user = _databaseContext.Users.Find(userId);
+
+
             Lib entity = new Lib();
-            entity.Book= book;
+            entity.Book = book;
             entity.User = user;
+            entity.UserName = user.UserName;
+            entity.BookName = book.BookName;
+            entity.Book.Stock = book.Stock - 1;
+
+            
 
             //List<LibViewModel> libs =
             //    _databaseContext.Libs.ToList().Select(x => _mapper.Map<LibViewModel>(x)).xToList();
-            
+
+            //var username = entity.User.UserName;
+            //var bookname = entity.Book.BookName;
+
             _databaseContext.Add(entity);
-            _databaseContext.SaveChanges();
-
-            return RedirectToAction(nameof(BookListed)); 
             
-        }
+            
+            _databaseContext.SaveChanges();
+           
 
+            return RedirectToAction(nameof(BookListed));
+
+        }
+        
         public IActionResult ListBook()
         {
-            ClaimsPrincipal principal = this.User;
-            string UserName = new string(principal.FindFirst("UserName").Value);
+            ClaimsPrincipal principal = HttpContext.User;
+            var userid = new Guid(principal.FindFirst(ClaimTypes.NameIdentifier).Value).ToString();
+
+            ViewBag.userid = userid;
+            
 
             List<LibViewModel> libs =
-                _databaseContext.Libs.ToList().Select(x => _mapper.Map<LibViewModel>(x)).ToList();
+                 _databaseContext.Libs.ToList().Select(x => _mapper.Map<LibViewModel>(x)).ToList();
+
             return View(libs);
            
 

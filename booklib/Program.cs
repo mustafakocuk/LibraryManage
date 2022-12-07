@@ -1,5 +1,6 @@
 using booklib.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -13,12 +14,22 @@ namespace booklib
 
             // Add services to the container.
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            //builder.Services.AddRazorPages()
+            //        .AddSessionStateTempDataProvider();
+            builder.Services.AddControllersWithViews().AddSessionStateTempDataProvider().AddRazorRuntimeCompilation();
+
+            builder.Services.AddSession();
+
+            //builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
             builder.Services.AddDbContext<DatabaseContext>(opts =>
             {
                 opts.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));                
             });
+
+            
+
+
+
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(opts =>
             {
                 opts.Cookie.Name = ".bookLib.auth";
@@ -43,8 +54,12 @@ namespace booklib
             app.UseRouting();
             app.UseAuthentication();
 
+
             app.UseAuthorization();
 
+            app.UseSession();
+
+            //app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

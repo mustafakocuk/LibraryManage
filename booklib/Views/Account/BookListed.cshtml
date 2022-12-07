@@ -80,14 +80,20 @@
                         {
                                 if (User.IsInRole("user"))
                             {
+                                if (book.Stock>1)
+                                {
+                                    <td>
 
+                                        <a asp-action="BorrowBook" asp-route-id="@book.BookId" 
+
+                                     class="btn btn-danger btn-sm"><i class="fa-solid fa-book"></i> İste</a>
+
+                                    </td>
+                                }else{
                                 <td>
                                     
-                                    <a asp-action="BorrowBook" asp-route-id="@book.BookId" 
-                                  
-                                     class="btn btn-danger btn-sm"><i class="fa-solid fa-book"></i> İste</a>
-                                   
                                 </td>
+                                }
                             }
                         }
                     </tr>
